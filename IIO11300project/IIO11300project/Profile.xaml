@@ -1,0 +1,28 @@
+﻿<Window x:Class="IIO11300project.Profile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IIO11300project"
+        mc:Ignorable="d"
+        Title="Profile" Height="500" Width="650">
+    <Grid>
+        <TextBlock Text="Asdasdasdasdasdasdasdasdasdasd" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Vertical" Margin="0, 50, 0, 0">
+            <TabControl x:Name="tcMenu" Height="400">
+                <TabItem x:Name="tabMatches" Header="Matches">
+
+                </TabItem>
+                <TabItem x:Name="tabChampions" Header="Champions">
+                    
+                </TabItem>
+                <TabItem x:Name="tabRunes" Header="Runes">
+                    
+                </TabItem>
+                <TabItem x:Name="tabMasteries" Header="Masteries">
+                    
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+    </Grid>
+</Window>
