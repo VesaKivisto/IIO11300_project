@@ -7,22 +7,33 @@
         mc:Ignorable="d"
         Title="Profile" Height="500" Width="650">
     <Grid>
-        <TextBlock Text="Asdasdasdasdasdasdasdasdasdasd" HorizontalAlignment="Center"/>
-        <StackPanel Orientation="Vertical" Margin="0, 50, 0, 0">
-            <TabControl x:Name="tcMenu" Height="400">
-                <TabItem x:Name="tabMatches" Header="Matches">
-
-                </TabItem>
-                <TabItem x:Name="tabChampions" Header="Champions">
-                    
-                </TabItem>
-                <TabItem x:Name="tabRunes" Header="Runes">
-                    
-                </TabItem>
-                <TabItem x:Name="tabMasteries" Header="Masteries">
-                    
-                </TabItem>
-            </TabControl>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="imgProfileIcon" Height="75" Width="75" Margin="25, 10, 0, 25"/>
+                    <TextBlock x:Name="tbSummonerName" Margin="20, 10, 0, 25" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="tbSummonerRegion" Margin="20, 10, 0, 25" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="imgRankIcon" Height="75" Width="75" Margin="25, 10, 0, 25"/>
+                    <TextBlock x:Name="tbRank" Margin="20, 10, 0, 25" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="tbLeagueName" Margin="20, 10, 0, 25" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="tbRankLP" Margin="20, 10, 0, 25" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="tbRankWinrate" Margin="20, 10, 0, 25" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TabControl x:Name="tcMenu" Height="350">
+                    <TabItem x:Name="tabMatches" Header="Matches">
+                    </TabItem>
+                    <TabItem x:Name="tabChampions" Header="Champions">
+                    </TabItem>
+                    <TabItem x:Name="tabRunes" Header="Runes">
+                    </TabItem>
+                    <TabItem x:Name="tabMasteries" Header="Masteries">
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

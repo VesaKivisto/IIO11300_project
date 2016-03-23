@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace IIO11300project
 {
@@ -28,10 +16,24 @@ namespace IIO11300project
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
+            JObject summonerData;
             RiotApiHandler apiHandler = new RiotApiHandler();
-            string region = cbRegions.SelectedValue.ToString();
-            string summonername = txtSummonername.Text;
-            apiHandler.RequestSummonerData(region, summonername);
+            Summoner summoner = new Summoner();
+
+            string region = cbRegions.SelectedValue.ToString().ToLower();
+            string summonerName = txtSummonerName.Text.ToLower();
+            summonerData = apiHandler.RequestSummonerData(region, summonerName);
+            summoner.ID = summonerData[summonerName]["id"].ToString();
+            summoner.Name = summonerData[summonerName]["name"].ToString();
+            summoner.ProfileIcon = summonerData[summonerName]["profileIconId"].ToString();
+
+            Profile profile = new Profile(summoner);
+
+            /*
+            string id = o[this.summonername]["id"].ToString();
+            string name = o[this.summonername]["name"].ToString();
+            string profileIcon = o[this.summonername]["profileIconId"].ToString();
+            */
         }
 
         private void InitCombobox()

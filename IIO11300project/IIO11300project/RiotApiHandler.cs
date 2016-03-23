@@ -16,32 +16,70 @@ namespace IIO11300project
     {
         private string apiKey;
         private string region;
-        private string summonername;
+        private string summonerName;
+        private string summonerID;
 
         public RiotApiHandler()
         {
-            this.apiKey = "b4772fd0-7fdc-4b50-a7bd-e9b4a2c8f61d";
+            this.apiKey = "";
         }
 
-        public void RequestSummonerData(string region, string summonername)
+        public JObject RequestSummonerData(string region, string summonerName)
         {
-            this.region = region.ToLower();
-            this.summonername = summonername.ToLower();
-            string url = "https://" + this.region + ".api.pvp.net/api/lol/" + this.region + "/v1.4/summoner/by-name/" + this.summonername + "?api_key=" + this.apiKey;
+            this.region = region;
+            this.summonerName = summonerName;
+            string url = "https://" + this.region + ".api.pvp.net/api/lol/" + this.region + "/v1.4/summoner/by-name/" + this.summonerName + "?api_key=" + this.apiKey;
             WebClient client = new WebClient();
             client.Encoding = Encoding.UTF8;
             string json = client.DownloadString(url);
 
-            //SummonerData summoner = JsonConvert.DeserializeObject<SummonerData>(json);
-            //MessageBox.Show(summoner.troikku.Name);
-
             // TÄMÄ TOIMII, WAUUUUUU
-            JObject o = JObject.Parse(json);
+            JObject summonerData = JObject.Parse(json);
+            return summonerData;
+
+            /*
             string id = o[this.summonername]["id"].ToString();
             string name = o[this.summonername]["name"].ToString();
             string profileIcon = o[this.summonername]["profileIconId"].ToString();
 
             MessageBox.Show("ID: " + id + "\n\rName: " + name + "\n\rIcon: " + profileIcon);
+            */
+        }
+
+        public string GetProfileIconURL(string profileIcon)
+        {
+            string url = "http://ddragon.leagueoflegends.com/cdn/6.5.1/img/profileicon/" + profileIcon + ".png";
+            return url;
+        }
+
+        public JObject RequestSummonerRankedData(string region, string summonerID)
+        {
+            this.region = region;
+            this.summonerID = summonerID;
+            string url = "https://" + this.region + ".api.pvp.net/api/lol/" + this.region + "/v2.5/league/by-summoner/" + this.summonerID + "/entry/?api_key=" + this.apiKey;
+            WebClient client = new WebClient();
+            client.Encoding = Encoding.UTF8;
+
+            try
+            {
+                string json = client.DownloadString(url);
+
+                JObject summonerRankedData = JObject.Parse(json);
+                return summonerRankedData;
+            }
+            catch (WebException ex)
+            {
+                JObject summonerRankedData = new JObject();
+                if (ex.Status == WebExceptionStatus.ProtocolError && ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return summonerRankedData;
+                    }
+                }
+                return summonerRankedData;
+            }
         }
     }
 }

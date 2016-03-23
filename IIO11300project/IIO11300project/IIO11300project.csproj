@@ -61,7 +61,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="RiotApiHandler.cs" />
-    <Compile Include="SummonerData.cs" />
+    <Compile Include="Search.xaml.cs">
+      <DependentUpon>Search.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Summoner.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,6 +78,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Profile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Search.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -109,6 +116,49 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\base_icons\bronze.png" />
+    <Resource Include="images\base_icons\bronze_iii.png" />
+    <Resource Include="images\base_icons\challenger.png" />
+    <Resource Include="images\base_icons\diamond.png" />
+    <Resource Include="images\base_icons\gold.png" />
+    <Resource Include="images\base_icons\master.png" />
+    <Resource Include="images\base_icons\platinum.png" />
+    <Resource Include="images\base_icons\provisional.png" />
+    <Resource Include="images\base_icons\silver.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\masteries-bg.jpg" />
+    <Resource Include="images\placeholder.png" />
+    <Resource Include="images\rune-bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\tier_icons\bronze_i.png" />
+    <Resource Include="images\tier_icons\bronze_ii.png" />
+    <Resource Include="images\tier_icons\bronze_iii.png" />
+    <Resource Include="images\tier_icons\bronze_iv.png" />
+    <Resource Include="images\tier_icons\bronze_v.png" />
+    <Resource Include="images\tier_icons\diamond_i.png" />
+    <Resource Include="images\tier_icons\diamond_ii.png" />
+    <Resource Include="images\tier_icons\diamond_iii.png" />
+    <Resource Include="images\tier_icons\diamond_iv.png" />
+    <Resource Include="images\tier_icons\diamond_v.png" />
+    <Resource Include="images\tier_icons\gold_i.png" />
+    <Resource Include="images\tier_icons\gold_ii.png" />
+    <Resource Include="images\tier_icons\gold_iii.png" />
+    <Resource Include="images\tier_icons\gold_iv.png" />
+    <Resource Include="images\tier_icons\gold_v.png" />
+    <Resource Include="images\tier_icons\platinum_i.png" />
+    <Resource Include="images\tier_icons\platinum_ii.png" />
+    <Resource Include="images\tier_icons\platinum_iii.png" />
+    <Resource Include="images\tier_icons\platinum_iv.png" />
+    <Resource Include="images\tier_icons\platinum_v.png" />
+    <Resource Include="images\tier_icons\silver_i.png" />
+    <Resource Include="images\tier_icons\silver_ii.png" />
+    <Resource Include="images\tier_icons\silver_iii.png" />
+    <Resource Include="images\tier_icons\silver_iv.png" />
+    <Resource Include="images\tier_icons\silver_v.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
