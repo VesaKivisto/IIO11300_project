@@ -8,25 +8,40 @@
         Title="Profile" Height="500" Width="650">
     <Grid>
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel x:Name="spSummonerInfo" Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
-                    <Image x:Name="imgProfileIcon" Height="75" Width="75" Margin="25, 10, 0, 25"/>
-                    <TextBlock x:Name="tbSummonerName" Margin="20, 10, 0, 25" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="tbSummonerRegion" Margin="20, 10, 0, 25" VerticalAlignment="Center"/>
+                    <Image x:Name="imgProfileIcon" Height="75" Width="75" Margin="25, 10, 0, 25" Source="{Binding Path=ProfileIcon}"/>
+                    <TextBlock x:Name="tbSummonerName" Margin="20, 10, 0, 25" VerticalAlignment="Center" Text="{Binding Path=Name}"/>
+                    <TextBlock x:Name="tbSummonerRegion" Margin="20, 10, 0, 25" VerticalAlignment="Center" Text="{Binding Path=Region}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Image x:Name="imgRankIcon" Height="75" Width="75" Margin="25, 10, 0, 25"/>
-                    <TextBlock x:Name="tbRank" Margin="20, 10, 0, 25" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="tbLeagueName" Margin="20, 10, 0, 25" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="tbRankLP" Margin="20, 10, 0, 25" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="tbRankWinrate" Margin="20, 10, 0, 25" VerticalAlignment="Center"/>
+                    <Image x:Name="imgRankIcon" Height="75" Width="75" Margin="25, 10, 0, 25" Source="{Binding Path=RankIcon}"/>
+                    <TextBlock x:Name="tbRank" Margin="20, 10, 0, 25" VerticalAlignment="Center" Text="{Binding Path=TierDivision}"/>
+                    <TextBlock x:Name="tbLeagueName" Margin="20, 10, 0, 25" VerticalAlignment="Center" Text="{Binding Path=LeagueName}"/>
+                    <TextBlock x:Name="tbRankLP" Margin="20, 10, 0, 25" VerticalAlignment="Center" Text="{Binding Path=LP}"/>
+                    <TextBlock x:Name="tbRankWinrate" Margin="20, 10, 0, 25" VerticalAlignment="Center" Text="{Binding Path=Winrate}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical">
-                <TabControl x:Name="tcMenu" Height="350">
+                <TabControl x:Name="tcMenu" Height="350" SelectionChanged="tcMenu_SelectionChanged">
                     <TabItem x:Name="tabMatches" Header="Matches">
                     </TabItem>
                     <TabItem x:Name="tabChampions" Header="Champions">
+                        <DataGrid x:Name="dgChampions" AutoGenerateColumns="False" ItemsSource="{Binding}">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Image" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image x:Name="imgChampionIcon" Height="50" Width="50" Source="{Binding Path=Icon}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn x:Name="dgChampionName" Header="Champion" Binding="{Binding Path=Name}" Width="*"/>
+                                <DataGridTextColumn x:Name="dgChampionLevel" Header="Level" Binding="{Binding Path=Level}" Width="*"/>
+                                <DataGridTextColumn x:Name="dgChampionTotalpoints" Header="Total points" Binding="{Binding Path=TotalPoints}" Width="*"/>
+                                <DataGridTextColumn x:Name="dgChampionNextlevel" Header="Until next level" Binding="{Binding Path=PointsToNextLevel}" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </TabItem>
                     <TabItem x:Name="tabRunes" Header="Runes">
                     </TabItem>

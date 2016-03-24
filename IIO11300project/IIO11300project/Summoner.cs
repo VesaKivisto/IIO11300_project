@@ -8,10 +8,11 @@ namespace IIO11300project
 {
     public class Summoner
     {
-        private string id;
+        protected string id;
         private string name;
         private string profileIcon;
         private string region;
+        private string platformID;
         private string lp;
         private int wins;
         private int losses;
@@ -42,9 +43,14 @@ namespace IIO11300project
             get { return region; }
             set { region = value; }
         }
+        public string PlatformID
+        {
+            get { return platformID; }
+            set { platformID = value; }
+        }
         public string LP
         {
-            get { return lp; }
+            get { return lp + "LP"; }
             set { lp = value; }
         }
         public int Wins
@@ -57,17 +63,17 @@ namespace IIO11300project
             get { return losses; }
             set { losses = value; }
         }
-        public decimal Winrate
+        public string Winrate
         {
             get
             {
                 if (this.wins != 0)
                 {
-                    return Math.Round((decimal) wins / (wins + losses), 2) * 100;
+                    return Math.Round((decimal) wins / (wins + losses), 2) * 100 + "% Winrate";
                 }
                 else
                 {
-                    return 0;
+                    return "0% Winrate";
                 }
             }
         }
@@ -85,6 +91,10 @@ namespace IIO11300project
         {
             get { return division; }
             set { division = value; }
+        }
+        public string TierDivision
+        {
+            get { return Tier + " " + Division; }
         }
         public string RankIcon
         {
