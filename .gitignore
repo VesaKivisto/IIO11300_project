@@ -11,6 +11,7 @@
 *.cache
 *.ilk
 *.log
+APp.config
 [Bb]in
 [Pp]roperties/
 [Dd]ebug*/
