@@ -61,7 +61,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Champion.cs" />
-    <Compile Include="DBHandler.cs" />
     <Compile Include="RiotApiHandler.cs" />
     <Compile Include="Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
@@ -161,12 +160,6 @@
     <Resource Include="images\tier_icons\silver_iii.png" />
     <Resource Include="images\tier_icons\silver_iv.png" />
     <Resource Include="images\tier_icons\silver_v.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\r_1_3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\6111.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
