@@ -91,15 +91,15 @@ namespace IIO11300project
         {
             get { return division; }
             set { division = value; }
-        }
-        public string TierDivision
-        {
-            get { return Tier + " " + Division; }
-        }
+        }     
         public string RankIcon
         {
             get { return rankIcon; }
             set { rankIcon = value; }
+        }
+        public string TierDivision
+        {
+            get { return Tier + " " + Division; }
         }
     }
 }

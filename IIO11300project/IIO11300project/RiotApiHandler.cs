@@ -18,7 +18,7 @@ namespace IIO11300project
 
         public RiotApiHandler()
         {
-            this.apiKey = "";
+            this.apiKey = "b4772fd0-7fdc-4b50-a7bd-e9b4a2c8f61d";
         }
 
         public Summoner RequestSummonerData(Summoner summoner)
@@ -141,6 +141,8 @@ namespace IIO11300project
             }
         }
 
+
+
         public Dictionary<string, string> GetRegionsPlatforms()
         {
             Dictionary<string, string> regions = new Dictionary<string, string>();
@@ -160,7 +162,7 @@ namespace IIO11300project
         public string GetPlatformByRegion(string region)
         {
             Dictionary<string, string> regions = GetRegionsPlatforms();
-            string platformID = regions[region.ToLower()];
+            string platformID = regions[region.ToUpper()];
             return platformID;
         }
 

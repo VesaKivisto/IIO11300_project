@@ -51,5 +51,9 @@ namespace IIO11300project
             get { return pointsToNextLevel; }
             set { pointsToNextLevel = value; }
         }
+        public string ChampionDisplay
+        {
+            get { return Icon + " " + Name; }
+        }
     }
 }
