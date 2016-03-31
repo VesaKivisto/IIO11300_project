@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IIO11300project"
         mc:Ignorable="d"
-        Title="Profile" Height="500" Width="650">
+        Title="Profile" Height="600" Width="800">
     <Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel x:Name="spSummonerInfo" Orientation="Horizontal">
@@ -23,16 +23,63 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical">
-                <TabControl x:Name="tcMenu" Height="350" SelectionChanged="tcMenu_SelectionChanged">
+                <TabControl x:Name="tcMenu" Height="450" SelectionChanged="tcMenu_SelectionChanged">
                     <TabItem x:Name="tabMatches" Header="Matches">
-                    </TabItem>
-                    <TabItem x:Name="tabChampions" Header="Champions">
-                        <DataGrid x:Name="dgChampions" AutoGenerateColumns="False" ItemsSource="{Binding}">
+                        <DataGrid>
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="Image" Width="*">
+                                <DataGridTemplateColumn Header="Champion" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Image x:Name="imgChampionIcon" Height="50" Width="50" Source="{Binding Path=Icon}"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Height="50" Width="50" Source="{Binding Path=Icon}"/>
+                                                <TextBlock Text="{Binding Path=Name}" Margin="10, 15, 0, 0"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Summoner spells" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Height="50" Width="50" Source="{Binding Path=Icon}"/>
+                                                <TextBlock Text="{Binding Path=Name}" Margin="10, 15, 0, 0"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Stats" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Height="50" Width="50" Source="{Binding Path=Icon}"/>
+                                                <TextBlock Text="{Binding Path=Name}" Margin="10, 15, 0, 0"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Items" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Height="50" Width="50" Source="{Binding Path=Icon}"/>
+                                                <TextBlock Text="{Binding Path=Name}" Margin="10, 15, 0, 0"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem x:Name="tabChampions" Header="Champions">
+                        <DataGrid x:Name="dgChampions" AutoGenerateColumns="False" ItemsSource="{Binding}" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Champion" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Height="50" Width="50" Source="{Binding Path=Icon}"/>
+                                                <TextBlock Text="{Binding Path=Name}" Margin="10, 15, 0, 0"/>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -40,13 +87,100 @@
                                 <DataGridTextColumn x:Name="dgChampionLevel" Header="Level" Binding="{Binding Path=Level}" Width="*"/>
                                 <DataGridTextColumn x:Name="dgChampionTotalpoints" Header="Total points" Binding="{Binding Path=TotalPoints}" Width="*"/>
                                 <DataGridTextColumn x:Name="dgChampionNextlevel" Header="Until next level" Binding="{Binding Path=PointsToNextLevel}" Width="*"/>
+                                <DataGridTextColumn Header="Level" Binding="{Binding Path=Level}" Width="*"/>
+                                <DataGridTextColumn Header="Total points" Binding="{Binding Path=TotalPoints}" Width="*"/>
+                                <DataGridTextColumn Header="Until next level" Binding="{Binding Path=PointsToNextLevel}" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem>
-                    <TabItem x:Name="tabRunes" Header="Runes">
-                    </TabItem>
-                    <TabItem x:Name="tabMasteries" Header="Masteries">
-                    </TabItem>
+                    <TabItem x:Name="tabRunes" Header="Runes" >
+                            <Grid>
+                                <Image Source="/images/rune-bg.png" />
+                                <Image Source="/images/r_1_3.png" Margin="98,363,633,6" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="159,363,572,6" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="227,363,504,6" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="84,311,647,57" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="140,307,591,62" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="194,319,537,50" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="107,263,624,106" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="180,263,551,106" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="144,223,587,146" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="111,178,620,191" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="175,174,556,195" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="137,131,594,238" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="189,107,542,262" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="221,62,510,307" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="276,36,455,333" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="332,17,399,352" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="392,2,339,367" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="420,48,311,321" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="459,5,272,364" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="491,49,240,320" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="519,3,212,366" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="533,87,198,282" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="560,41,171,328" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="595,0,136,369" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="639,36,92,333" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="603,76,128,293" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="628,125,103,244" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="110,41,593,301" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="270,220,433,122" Stretch="Fill" />
+                                <Image Source="/images/r_1_3.png" Margin="477,162,226,180" Stretch="Fill" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="tabMasteries" Header="Masteries" IsSelected="True" ForceCursor="True">
+                            <Grid>
+                                <Image Source="/images/masteries-bg.jpg" />
+                                <Image Source="/images/6111.png" Margin="61,20,678,357" />
+                                <Image Source="/images/6111.png" Margin="184,20,555,357" />
+                                <Image Source="/images/6111.png" Margin="61,80,678,297" />
+                                <Image Source="/images/6111.png" Margin="122,80,617,297" />
+                                <Image Source="/images/6111.png" Margin="184,80,555,297" />
+                                <Image Source="/images/6111.png" Margin="61,140,678,237" />
+                                <Image Source="/images/6111.png" Margin="184,140,555,237" />
+                                <Image Source="/images/6111.png" Margin="91,200,648,177" />
+                                <Image Source="/images/6111.png" Margin="154,200,585,177" />
+                                <Image Source="/images/6111.png" Margin="61,260,678,117" />
+                                <Image Source="/images/6111.png" Margin="184,260,555,117" />
+                                <Image Source="/images/6111.png" Margin="61,320,678,57" />
+                                <Image Source="/images/6111.png" Margin="122,320,617,57" />
+                                <Image Source="/images/6111.png" Margin="184,320,555,57" />
+                                <Image Source="/images/6111.png" Margin="306,20,433,357" />
+                                <Image Source="/images/6111.png" Margin="429,20,310,357" />
+                                <Image Source="/images/6111.png" Margin="306,80,433,297" />
+                                <Image Source="/images/6111.png" Margin="367,80,372,297" />
+                                <Image Source="/images/6111.png" Margin="429,80,310,297" />
+                                <Image Source="/images/6111.png" Margin="306,140,433,237" />
+                                <Image Source="/images/6111.png" Margin="429,140,310,237" />
+                                <Image Source="/images/6111.png" Margin="336,200,403,177" />
+                                <Image Source="/images/6111.png" Margin="399,200,340,177" />
+                                <Image Source="/images/6111.png" Margin="306,260,433,117" />
+                                <Image Source="/images/6111.png" Margin="429,260,310,117" />
+                                <Image Source="/images/6111.png" Margin="306,320,433,57" />
+                                <Image Source="/images/6111.png" Margin="367,320,372,57" />
+                                <Image Source="/images/6111.png" Margin="429,320,310,57" />
+                                <Image Source="/images/6111.png" Margin="549,20,190,357" />
+                                <Image Source="/images/6111.png" Margin="672,20,67,357" />
+                                <Image Source="/images/6111.png" Margin="579,80,160,297" />
+                                <Image Source="/images/6111.png" Margin="642,80,97,297" />
+                                <Image Source="/images/6111.png" Margin="549,140,190,237" />
+                                <Image Source="/images/6111.png" Margin="672,140,67,237" />
+                                <Image Source="/images/6111.png" Margin="579,200,160,177" />
+                                <Image Source="/images/6111.png" Margin="642,200,97,177" />
+                                <Image Source="/images/6111.png" Margin="549,260,190,117" />
+                                <Image Source="/images/6111.png" Margin="672,260,67,117" />
+                                <Image Source="/images/6111.png" Margin="549,320,190,57" />
+                                <Image Source="/images/6111.png" Margin="610,320,129,57" />
+                                <Image Source="/images/6111.png" Margin="672,320,67,57" />
+                            </Grid>
+                        </TabItem>
+                        <ListView x:Name="listView" Height="100" Width="100">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Asd"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
                 </TabControl>
             </StackPanel>
         </StackPanel>
