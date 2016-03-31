@@ -26,8 +26,7 @@ namespace IIO11300project.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server = mysql.labranet.jamk.fi; database =H9073_2; user = H9073; password = hWpL" +
-            "s99o8zwjXQzcQdXHdkZDdgDYZ9p9")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server = localhost; database = test; user = root; password = ;")]
         public string Database {
             get {
                 return ((string)(this["Database"]));

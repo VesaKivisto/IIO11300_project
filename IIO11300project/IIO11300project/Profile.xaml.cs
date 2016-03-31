@@ -30,14 +30,12 @@ namespace IIO11300project
 
         public void InitSummonerProfile(Summoner summoner)
         {
-            RiotApiHandler apiHandler = new RiotApiHandler();
-            summoner = apiHandler.RequestSummonerRankedData(summoner);
+            summoner = RiotApiHandler.RequestRankedData(summoner);
             spSummonerInfo.DataContext = summoner;
         }
 
         private void tcMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RiotApiHandler apiHandler = new RiotApiHandler();
             if (e.Source is TabControl)
             {
                 TabControl tabControl = (TabControl)sender;
@@ -46,25 +44,23 @@ namespace IIO11300project
                 switch(current)
                 {
                     case "Champions":
-                        summoner.PlatformID = apiHandler.GetPlatformByRegion(summoner.Region).ToLower();
-                        GetChampionMastery(summoner.PlatformID);
+                        List<Champion> champions = RiotApiHandler.RequestChampionMastery(summoner);
+                        dgChampions.DataContext = champions;
+                        break;
+                    case "Masteries":
+                        /*
+                        List<string> masteries = RiotApiHandler.RequestMasteryPages(summoner);
+                        grdMasteryPage.DataContext = masteries;
+                        */
+                        List<Mastery> masteries = RiotApiHandler.GetAllMasteryData();
+                        masteries = RiotApiHandler.RequestMasteryPages(summoner, masteries);
+                        grdMasteryPage.DataContext = masteries;
+                        break;
+                    case "Runes":
+                        List<string> runes = RiotApiHandler.RequestRunePages(summoner);
+                        grdRunePage.DataContext = runes;
                         break;
                 }
-            }
-        }
-
-        private void GetChampionMastery(string platformID)
-        {
-            try
-            {
-                List<Champion> champions = new List<Champion>();
-                RiotApiHandler apiHandler = new RiotApiHandler();
-                champions = apiHandler.RequestChampionMastery(summoner);
-                dgChampions.DataContext = champions;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
     }

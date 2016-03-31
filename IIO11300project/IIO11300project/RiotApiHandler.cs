@@ -9,23 +9,19 @@ using System.Diagnostics;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 
 namespace IIO11300project
 {
-    class RiotApiHandler
+    public static class RiotApiHandler
     {
-        private string apiKey;
+        private static string apiKey = "";
 
-        public RiotApiHandler()
-        {
-            this.apiKey = "";
-        }
-
-        public Summoner RequestSummonerData(Summoner summoner)
+        public static Summoner RequestSummonerData(Summoner summoner)
         {
             try
             {
-                string url = "https://" + summoner.Region + ".api.pvp.net/api/lol/" + summoner.Region + "/v1.4/summoner/by-name/" + summoner.Name + "?api_key=" + this.apiKey;
+                string url = "https://" + summoner.Region + ".api.pvp.net/api/lol/" + summoner.Region + "/v1.4/summoner/by-name/" + summoner.Name + "?api_key=" + apiKey;
                 WebClient client = new WebClient();
                 client.Encoding = Encoding.UTF8;
                 string json = client.DownloadString(url);
@@ -33,19 +29,35 @@ namespace IIO11300project
                 summoner.ID = summonerData[summoner.Name]["id"].ToString();
                 summoner.ProfileIcon = GetProfileIconURL(summonerData[summoner.Name]["profileIconId"].ToString());
                 summoner.Name = summonerData[summoner.Name]["name"].ToString();
+                summoner.PlatformID = GetPlatformByRegion(summoner.Region);
                 return summoner;
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError && ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        throw ex;
+                    }
+                    else
+                    {
+                        throw ex;
+                    }
+                }
+                else
+                {
+                    throw ex;
+                }
             }
         }
 
-        public Summoner RequestSummonerRankedData(Summoner summoner)
+        public static Summoner RequestRankedData(Summoner summoner)
         {
             try
             {
-                string url = "https://" + summoner.Region + ".api.pvp.net/api/lol/" + summoner.Region + "/v2.5/league/by-summoner/" + summoner.ID + "/entry/?api_key=" + this.apiKey;
+                string url = "https://" + summoner.Region + ".api.pvp.net/api/lol/" + summoner.Region + "/v2.5/league/by-summoner/" + summoner.ID + "/entry/?api_key=" + apiKey;
                 WebClient client = new WebClient();
                 client.Encoding = Encoding.UTF8;
                 string json = client.DownloadString(url);
@@ -104,25 +116,31 @@ namespace IIO11300project
                     var resp = (HttpWebResponse)ex.Response;
                     if (resp.StatusCode == HttpStatusCode.NotFound)
                     {
-                        return summoner;
+                        throw ex;
+                    }
+                    else
+                    {
+                        throw ex;
                     }
                 }
-                return summoner;
+                else
+                {
+                    throw ex;
+                }
             }
         }
-        
-        public List<Champion> RequestChampionMastery(Summoner summoner)
+
+        public static List<Champion> RequestChampionMastery(Summoner summoner)
         {
             try
             {
                 List<Champion> champions = new List<Champion>();
                 WebClient client = new WebClient();
-
                 client.Encoding = Encoding.UTF8;
-                string url = "https://" + summoner.Region + ".api.pvp.net/championmastery/location/" + summoner.PlatformID + "/player/" + summoner.ID + "/champions?api_key=" + this.apiKey;
+
+                string url = "https://" + summoner.Region + ".api.pvp.net/championmastery/location/" + summoner.PlatformID + "/player/" + summoner.ID + "/champions?api_key=" + apiKey;
                 string json = client.DownloadString(url);
                 JArray championMasteryData = JArray.Parse(json);
-
                 foreach (var value in championMasteryData)
                 {
                     Champion champion = new Champion();
@@ -130,6 +148,13 @@ namespace IIO11300project
                     champion.Level = value["championLevel"].ToString();
                     champion.TotalPoints = value["championPoints"].ToString();
                     champion.PointsToNextLevel = value["championPointsUntilNextLevel"].ToString();
+
+                    DataTable table = DBHandler.GetChampionData(champion.ID);
+                    foreach (DataRow row in table.Rows)
+                    {
+                        champion.Name = row["name"].ToString();
+                        champion.Icon = row["image"].ToString();
+                    }
                     champions.Add(champion);
                 }
 
@@ -141,7 +166,60 @@ namespace IIO11300project
             }
         }
 
-        public Dictionary<string, string> GetRegionsPlatforms()
+        public static List<Mastery> RequestMasteryPages(Summoner summoner, List<Mastery> masteries)
+        {
+            try
+            {
+                WebClient client = new WebClient();
+                client.Encoding = Encoding.UTF8;
+
+                string url = "https://" + summoner.Region + ".api.pvp.net/api/lol/" + summoner.Region + "/v1.4/summoner/" + summoner.ID + "/masteries?api_key=" + apiKey;
+                string json = client.DownloadString(url);
+                JObject masteryData = JObject.Parse(json);
+                foreach (var page in masteryData[summoner.ID]["pages"][0]["masteries"])
+                {
+                    string id = page["id"].ToString();
+                    int index = masteries.FindIndex(mastery => mastery.ID.Equals(id, StringComparison.Ordinal));
+                    masteries[index].Opacity = "1.0";
+                }
+                return masteries;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static List<string> RequestRunePages(Summoner summoner)
+        {
+            try
+            {
+                List<string> runes = new List<string>();
+                WebClient client = new WebClient();
+                client.Encoding = Encoding.UTF8;
+
+                string url = "https://" + summoner.Region + ".api.pvp.net/api/lol/" + summoner.Region + "/v1.4/summoner/" + summoner.ID + "/runes?api_key=" + apiKey;
+                string json = client.DownloadString(url);
+                JObject runeData = JObject.Parse(json);
+                foreach (var page in runeData[summoner.ID]["pages"][0]["slots"])
+                {
+                    string runeID = page["runeId"].ToString();
+                    DataTable table = DBHandler.GetRuneData(runeID);
+                    foreach (DataRow row in table.Rows)
+                    {
+                        string runeIcon = row["image"].ToString();
+                        runes.Add(runeIcon);
+                    }
+                }
+                return runes;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static Dictionary<string, string> GetRegionsPlatforms()
         {
             Dictionary<string, string> regions = new Dictionary<string, string>();
             regions.Add("BR", "BR1");
@@ -157,18 +235,40 @@ namespace IIO11300project
             return regions;
         }
 
-        public string GetPlatformByRegion(string region)
+        public static string GetPlatformByRegion(string region)
         {
             Dictionary<string, string> regions = GetRegionsPlatforms();
             string platformID = regions[region.ToUpper()];
             return platformID;
         }
 
-        // This is going to get replaced
-        public string GetProfileIconURL(string profileIcon)
+        // This is going to be replaced
+        public static string GetProfileIconURL(string profileIcon)
         {
             string url = "http://ddragon.leagueoflegends.com/cdn/6.5.1/img/profileicon/" + profileIcon + ".png";
             return url;
+        }
+
+        // This is also going to be replaced
+        public static string GetRuneIconUrl(string runeId)
+        {
+            string url = "http://ddragon.leagueoflegends.com/cdn/6.6.1/img/rune/" + runeId + ".png";
+            return url;
+        }
+
+        public static List<Mastery> GetAllMasteryData()
+        {
+            DataTable table = DBHandler.GetAllMasteries();
+            List<Mastery> masteries = new List<Mastery>();
+            foreach (DataRow row in table.Rows)
+            {
+                Mastery mastery = new Mastery();
+                mastery.ID = row["id"].ToString();
+                mastery.Icon = row["image"].ToString();
+                mastery.Opacity = "0.4";
+                masteries.Add(mastery);
+            }
+            return masteries;
         }
     }
 }

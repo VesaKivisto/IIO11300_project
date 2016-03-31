@@ -10,7 +10,6 @@ namespace IIO11300project
     /// </summary>
     public partial class Search : Window
     {
-        RiotApiHandler apiHandler;
         public Search()
         {
             InitializeComponent();
@@ -21,11 +20,10 @@ namespace IIO11300project
         {
             try
             {
-                apiHandler = new RiotApiHandler();
                 Summoner summoner = new Summoner();
                 summoner.Name = txtSummonerName.Text.ToLower();
                 summoner.Region = cbRegions.SelectedValue.ToString().ToLower();
-                summoner = apiHandler.RequestSummonerData(summoner);
+                summoner = RiotApiHandler.RequestSummonerData(summoner);
 
                 Profile profile = new Profile(summoner);
                 profile.Show();
@@ -39,10 +37,9 @@ namespace IIO11300project
 
         private void InitCombobox()
         {
-            apiHandler = new RiotApiHandler();
             Dictionary<string, string> regions = new Dictionary<string, string>();
 
-            regions = apiHandler.GetRegionsPlatforms();
+            regions = RiotApiHandler.GetRegionsPlatforms();
             foreach (var value in regions.Keys)
             {
                 cbRegions.Items.Add(value);
