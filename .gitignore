@@ -211,5 +211,5 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
-IIO11300project/IIO11300project/App.config
-IIO11300project/IIO11300project/Properties/
+Properties/
+App.config
