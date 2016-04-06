@@ -64,15 +64,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BLController.cs" />
     <Compile Include="Champion.cs" />
     <Compile Include="DBHandler.cs" />
     <Compile Include="Mastery.cs" />
+    <Compile Include="Match.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RiotApiHandler.cs" />
+    <Compile Include="Rune.cs" />
     <Compile Include="Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
@@ -168,6 +171,9 @@
   <ItemGroup>
     <Resource Include="images\6111.png" />
     <Resource Include="images\r_1_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\rune-slot-ids.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

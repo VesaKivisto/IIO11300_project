@@ -28,13 +28,13 @@ namespace IIO11300project
         {
             get
             {
-                if (Wins != 0)
+                if (Wins != 0 && Losses != 0)
                 {
                     return Math.Round((decimal)Wins / (Wins + Losses), 2) * 100 + "% Winrate";
                 }
                 else
                 {
-                    return "0% Winrate";
+                    return "";
                 }
             }
         }

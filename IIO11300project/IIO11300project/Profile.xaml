@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Profile" Height="600" Width="800">
     <Grid>
-        <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical" Height="566" VerticalAlignment="Top">
             <StackPanel x:Name="spSummonerInfo" Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
                     <Image x:Name="imgProfileIcon" Height="75" Width="75" Margin="25, 10, 0, 25" Source="{Binding Path=ProfileIcon}"/>
@@ -24,35 +24,40 @@
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <TabControl x:Name="tcMenu" Height="450" SelectionChanged="tcMenu_SelectionChanged">
+                    <TabItem IsSelected="True" Visibility="Hidden" />
                     <TabItem x:Name="tabMatches" Header="Matches">
-                        <DataGrid>
+                        <DataGrid x:Name="dgMatches" AutoGenerateColumns="False" ItemsSource="{Binding}" IsReadOnly="True" >
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="Champion" Width="*">
+                                <DataGridTemplateColumn Header="Champion" Width="150">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Image Height="50" Width="50" Source="{Binding Path=Icon}"/>
-                                                <TextBlock Text="{Binding Path=Name}" Margin="10, 15, 0, 0"/>
+                                                <Image Height="50" Width="50" Source="{Binding Path=ChampionIcon}"/>
+                                                <TextBlock Text="{Binding Path=ChampionName}" Margin="10, 30, 0, 0"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Summoner spells" Width="*">
+                                <DataGridTemplateColumn Header="Summoner spells" Width="100">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Image Height="50" Width="50" Source="{Binding Path=Icon}"/>
-                                                <TextBlock Text="{Binding Path=Name}" Margin="10, 15, 0, 0"/>
+                                                <Image Height="30" Width="30" Source="{Binding Path=Spell1Icon}" Margin="10, 0, 10, 0"/>
+                                                <Image Height="30" Width="30" Source="{Binding Path=Spell2Icon}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Stats" Width="*">
+                                <DataGridTemplateColumn Header="Stats" Width="200">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Image Height="50" Width="50" Source="{Binding Path=Icon}"/>
-                                                <TextBlock Text="{Binding Path=Name}" Margin="10, 15, 0, 0"/>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Path=StatsDisplay}" Margin="15, 5, 0, 5"/>
+                                                </StackPanel>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Path=GoldDisplay}" Margin="35, 20, 0, 0"/>
+                                                </StackPanel>
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -60,9 +65,14 @@
                                 <DataGridTemplateColumn Header="Items" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Image Height="50" Width="50" Source="{Binding Path=Icon}"/>
-                                                <TextBlock Text="{Binding Path=Name}" Margin="10, 15, 0, 0"/>
+                                            <StackPanel x:Name="spItems" Orientation="Horizontal">
+                                                <Image Height="30" Width="30" Source="{Binding Path=Items[0].Icon}" Margin="5, 0, 5, 0"/>
+                                                <Image Height="30" Width="30" Source="{Binding Path=Items[1].Icon}" Margin="0, 0, 5, 0"/>
+                                                <Image Height="30" Width="30" Source="{Binding Path=Items[2].Icon}" Margin="0, 0, 5, 0"/>
+                                                <Image Height="30" Width="30" Source="{Binding Path=Items[3].Icon}" Margin="0, 0, 5, 0"/>
+                                                <Image Height="30" Width="30" Source="{Binding Path=Items[4].Icon}" Margin="0, 0, 5, 0"/>
+                                                <Image Height="30" Width="30" Source="{Binding Path=Items[5].Icon}" Margin="0, 0, 5, 0"/>
+                                                <Image Height="30" Width="30" Source="{Binding Path=Items[6].Icon}" Margin="0, 0, 5, 0"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -70,7 +80,7 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem>
-                    <TabItem x:Name="tabChampions" Header="Champions">
+                    <TabItem x:Name="tabChampions" Header="Champions" >
                         <DataGrid x:Name="dgChampions" AutoGenerateColumns="False" ItemsSource="{Binding}" IsReadOnly="True">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="Champion" Width="*">
@@ -90,84 +100,102 @@
                         </DataGrid>
                     </TabItem>
                     <TabItem x:Name="tabRunes" Header="Runes" >
-                        <Grid x:Name="grdRunePage">
-                            <Image Source="/images/rune-bg.png" />
-                            <Image Source="{Binding [0]}" Margin="98,363,633,6" Stretch="Fill" />
-                            <Image Source="{Binding [1]}" Margin="159,363,572,6" Stretch="Fill" />
-                            <Image Source="{Binding [2]}" Margin="227,363,504,6" Stretch="Fill" />
-                            <Image Source="{Binding [3]}" Margin="84,311,647,57" Stretch="Fill" />
-                            <Image Source="{Binding [4]}" Margin="140,307,591,62" Stretch="Fill" />
-                            <Image Source="{Binding [5]}" Margin="194,319,537,50" Stretch="Fill" />
-                            <Image Source="{Binding [6]}" Margin="107,263,624,106" Stretch="Fill" />
-                            <Image Source="{Binding [7]}" Margin="180,263,551,106" Stretch="Fill" />
-                            <Image Source="{Binding [8]}" Margin="144,223,587,146" Stretch="Fill" />
-                            <Image Source="{Binding [9]}" Margin="111,178,620,191" Stretch="Fill" />
-                            <Image Source="{Binding [10]}" Margin="175,174,556,195" Stretch="Fill" />
-                            <Image Source="{Binding [11]}" Margin="137,131,594,238" Stretch="Fill" />
-                            <Image Source="{Binding [12]}" Margin="189,107,542,262" Stretch="Fill" />
-                            <Image Source="{Binding [13]}" Margin="221,62,510,307" Stretch="Fill" />
-                            <Image Source="{Binding [14]}" Margin="276,36,455,333" Stretch="Fill" />
-                            <Image Source="{Binding [15]}" Margin="332,17,399,352" Stretch="Fill" />
-                            <Image Source="{Binding [16]}" Margin="392,2,339,367" Stretch="Fill" />
-                            <Image Source="{Binding [17]}" Margin="420,48,311,321" Stretch="Fill" />
-                            <Image Source="{Binding [18]}" Margin="459,5,272,364" Stretch="Fill" />
-                            <Image Source="{Binding [19]}" Margin="491,49,240,320" Stretch="Fill" />
-                            <Image Source="{Binding [20]}" Margin="519,3,212,366" Stretch="Fill" />
-                            <Image Source="{Binding [21]}" Margin="533,87,198,282" Stretch="Fill" />
-                            <Image Source="{Binding [22]}" Margin="560,41,171,328" Stretch="Fill" />
-                            <Image Source="{Binding [23]}" Margin="595,0,136,369" Stretch="Fill" />
-                            <Image Source="{Binding [24]}" Margin="639,36,92,333" Stretch="Fill" />
-                            <Image Source="{Binding [25]}" Margin="603,76,128,293" Stretch="Fill" />
-                            <Image Source="{Binding [26]}" Margin="628,125,103,244" Stretch="Fill" />
-                            <Image Source="{Binding [27]}" Margin="110,41,593,301" Stretch="Fill" />
-                            <Image Source="{Binding [28]}" Margin="270,220,433,122" Stretch="Fill" />
-                            <Image Source="{Binding [29]}" Margin="477,162,226,180" Stretch="Fill" />
+                        <Grid>
+                            <StackPanel>
+                                <TabControl x:Name="tcRunes">
+                                    <TabItem Header="1" />
+                                </TabControl>
+                            </StackPanel>
+                            <Grid Margin="0, 28, 0, 0" x:Name="grdRunes">
+                                <Image Source="/images/rune-bg.png" Height="395" Margin="10,0,160,0"/>
+                                <Image Source="{Binding [0].Icon}" Margin="{Binding [0].Position}" ToolTip="{Binding [0].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [1].Icon}" Margin="{Binding [1].Position}" ToolTip="{Binding [1].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [2].Icon}" Margin="{Binding [2].Position}" ToolTip="{Binding [2].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [3].Icon}" Margin="{Binding [3].Position}" ToolTip="{Binding [3].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [4].Icon}" Margin="{Binding [4].Position}" ToolTip="{Binding [4].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [5].Icon}" Margin="{Binding [5].Position}" ToolTip="{Binding [5].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [6].Icon}" Margin="{Binding [6].Position}" ToolTip="{Binding [6].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [7].Icon}" Margin="{Binding [7].Position}" ToolTip="{Binding [7].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [8].Icon}" Margin="{Binding [8].Position}" ToolTip="{Binding [8].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [9].Icon}" Margin="{Binding [9].Position}" ToolTip="{Binding [9].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [10].Icon}" Margin="{Binding [10].Position}" ToolTip="{Binding [10].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [11].Icon}" Margin="{Binding [11].Position}" ToolTip="{Binding [11].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [12].Icon}" Margin="{Binding [12].Position}" ToolTip="{Binding [12].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [13].Icon}" Margin="{Binding [13].Position}" ToolTip="{Binding [13].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [14].Icon}" Margin="{Binding [14].Position}" ToolTip="{Binding [14].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [15].Icon}" Margin="{Binding [15].Position}" ToolTip="{Binding [15].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [16].Icon}" Margin="{Binding [16].Position}" ToolTip="{Binding [16].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [17].Icon}" Margin="{Binding [17].Position}" ToolTip="{Binding [17].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [18].Icon}" Margin="{Binding [18].Position}" ToolTip="{Binding [18].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [19].Icon}" Margin="{Binding [19].Position}" ToolTip="{Binding [19].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [20].Icon}" Margin="{Binding [20].Position}" ToolTip="{Binding [20].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [21].Icon}" Margin="{Binding [21].Position}" ToolTip="{Binding [21].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [22].Icon}" Margin="{Binding [22].Position}" ToolTip="{Binding [22].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [23].Icon}" Margin="{Binding [23].Position}" ToolTip="{Binding [23].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [24].Icon}" Margin="{Binding [24].Position}" ToolTip="{Binding [24].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [25].Icon}" Margin="{Binding [25].Position}" ToolTip="{Binding [25].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [26].Icon}" Margin="{Binding [26].Position}" ToolTip="{Binding [26].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [27].Icon}" Margin="{Binding [27].Position}" ToolTip="{Binding [27].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [28].Icon}" Margin="{Binding [28].Position}" ToolTip="{Binding [28].Descr}" Stretch="Fill" />
+                                <Image Source="{Binding [29].Icon}" Margin="{Binding [29].Position}" ToolTip="{Binding [29].Descr}" Stretch="Fill" />
+                                <StackPanel Margin="620,0,5,0" x:Name="spPageInfo">
+                                    <TextBlock Text="{Binding Path=Name}" />
+                                    <TextBlock Text="{Binding Path=RuneDisplay}" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Grid>
                         </Grid>
                     </TabItem>
                     <TabItem x:Name="tabMasteries" Header="Masteries">
                         <Grid x:Name="grdMasteryPage">
-                            <Image Source="/images/masteries-bg.jpg" />
-                            <Image Source="{Binding [0].Icon}" Margin="61,20,678,357" Opacity="{Binding [0].Opacity}" />
-                            <Image Source="{Binding [1].Icon}" Margin="184,20,555,357" Opacity="{Binding [1].Opacity}" />
-                            <Image Source="{Binding [2].Icon}" Margin="61,80,678,297" Opacity="{Binding [2].Opacity}" />
-                            <Image Source="{Binding [3].Icon}" Margin="122,80,617,297" Opacity="{Binding [3].Opacity}" />
-                            <Image Source="{Binding [4].Icon}" Margin="184,80,555,297" Opacity="{Binding [4].Opacity}" />
-                            <Image Source="{Binding [5].Icon}" Margin="61,140,678,237" Opacity="{Binding [5].Opacity}" />
-                            <Image Source="{Binding [6].Icon}" Margin="184,140,555,237" Opacity="{Binding [6].Opacity}" />
-                            <Image Source="{Binding [7].Icon}" Margin="91,200,648,177" Opacity="{Binding [7].Opacity}" />
-                            <Image Source="{Binding [8].Icon}" Margin="154,200,585,177" Opacity="{Binding [8].Opacity}" />
-                            <Image Source="{Binding [9].Icon}" Margin="61,260,678,117" Opacity="{Binding [9].Opacity}" />
-                            <Image Source="{Binding [10].Icon}" Margin="184,260,555,117" Opacity="{Binding [10].Opacity}" />
-                            <Image Source="{Binding [11].Icon}" Margin="61,320,678,57" Opacity="{Binding [11].Opacity}" />
-                            <Image Source="{Binding [12].Icon}" Margin="122,320,617,57" Opacity="{Binding [12].Opacity}" />
-                            <Image Source="{Binding [13].Icon}" Margin="184,320,555,57" Opacity="{Binding [13].Opacity}" />
-                            <Image Source="{Binding [27].Icon}" Margin="306,20,433,357" Opacity="{Binding [27].Opacity}" />
-                            <Image Source="{Binding [28].Icon}" Margin="429,20,310,357" Opacity="{Binding [28].Opacity}" />
-                            <Image Source="{Binding [29].Icon}" Margin="306,80,433,297" Opacity="{Binding [29].Opacity}" />
-                            <Image Source="{Binding [30].Icon}" Margin="367,80,372,297" Opacity="{Binding [30].Opacity}" />
-                            <Image Source="{Binding [31].Icon}" Margin="429,80,310,297" Opacity="{Binding [31].Opacity}" />
-                            <Image Source="{Binding [32].Icon}" Margin="306,140,433,237" Opacity="{Binding [32].Opacity}" />
-                            <Image Source="{Binding [33].Icon}" Margin="429,140,310,237" Opacity="{Binding [33].Opacity}" />
-                            <Image Source="{Binding [34].Icon}" Margin="336,200,403,177" Opacity="{Binding [34].Opacity}" />
-                            <Image Source="{Binding [35].Icon}" Margin="399,200,340,177" Opacity="{Binding [35].Opacity}" />
-                            <Image Source="{Binding [36].Icon}" Margin="306,260,433,117" Opacity="{Binding [36].Opacity}" />
-                            <Image Source="{Binding [37].Icon}" Margin="429,260,310,117" Opacity="{Binding [37].Opacity}" />
-                            <Image Source="{Binding [38].Icon}" Margin="306,320,433,57" Opacity="{Binding [38].Opacity}" />
-                            <Image Source="{Binding [39].Icon}" Margin="367,320,372,57" Opacity="{Binding [39].Opacity}" />
-                            <Image Source="{Binding [40].Icon}" Margin="429,320,310,57" Opacity="{Binding [40].Opacity}" />
-                            <Image Source="{Binding [14].Icon}" Margin="549,20,190,357" Opacity="{Binding [14].Opacity}" />
-                            <Image Source="{Binding [15].Icon}" Margin="672,20,67,357" Opacity="{Binding [15].Opacity}" />
-                            <Image Source="{Binding [16].Icon}" Margin="579,80,160,297" Opacity="{Binding [16].Opacity}" />
-                            <Image Source="{Binding [17].Icon}" Margin="642,80,97,297" Opacity="{Binding [17].Opacity}" />
-                            <Image Source="{Binding [18].Icon}" Margin="549,140,190,237" Opacity="{Binding [18].Opacity}" />
-                            <Image Source="{Binding [19].Icon}" Margin="672,140,67,237" Opacity="{Binding [19].Opacity}" />
-                            <Image Source="{Binding [20].Icon}" Margin="579,200,160,177" Opacity="{Binding [20].Opacity}" />
-                            <Image Source="{Binding [21].Icon}" Margin="642,200,97,177" Opacity="{Binding [21].Opacity}" />
-                            <Image Source="{Binding [22].Icon}" Margin="549,260,190,117" Opacity="{Binding [22].Opacity}" />
-                            <Image Source="{Binding [23].Icon}" Margin="672,260,67,117" Opacity="{Binding [23].Opacity}" />
-                            <Image Source="{Binding [24].Icon}" Margin="549,320,190,57" Opacity="{Binding [24].Opacity}" />
-                            <Image Source="{Binding [25].Icon}" Margin="610,320,129,57" Opacity="{Binding [25].Opacity}" />
-                            <Image Source="{Binding [26].Icon}" Margin="672,320,67,57" Opacity="{Binding [26].Opacity}" />
+                            <StackPanel>
+                                <TabControl>
+                                    <TabItem Header="1" />
+                                </TabControl>
+                            </StackPanel>
+                            <Grid Margin="0, 28, 0, 0">
+                                <Image Source="/images/masteries-bg.jpg" />
+                                <Image Source="{Binding [0].Icon}" Margin="80,19,658,328" Opacity="{Binding [0].Opacity}" ToolTip="{Binding [0].ToolTip}" />
+                                <Image Source="{Binding [1].Icon}" Margin="195,19,542,329" Opacity="{Binding [1].Opacity}" ToolTip="{Binding [1].ToolTip}" />
+                                <Image Source="{Binding [2].Icon}" Margin="80,79,658,272" Opacity="{Binding [2].Opacity}" ToolTip="{Binding [2].ToolTip}" />
+                                <Image Source="{Binding [3].Icon}" Margin="138,79,601,272" Opacity="{Binding [3].Opacity}" ToolTip="{Binding [3].ToolTip}" />
+                                <Image Source="{Binding [4].Icon}" Margin="197,79,540,272" Opacity="{Binding [4].Opacity}" ToolTip="{Binding [4].ToolTip}" />
+                                <Image Source="{Binding [5].Icon}" Margin="80,139,658,209" Opacity="{Binding [5].Opacity}" ToolTip="{Binding [5].ToolTip}" />
+                                <Image Source="{Binding [6].Icon}" Margin="197,139,540,209" Opacity="{Binding [6].Opacity}" ToolTip="{Binding [6].ToolTip}" />
+                                <Image Source="{Binding [7].Icon}" Margin="106,199,632,149" Opacity="{Binding [7].Opacity}" ToolTip="{Binding [7].ToolTip}" />
+                                <Image Source="{Binding [8].Icon}" Margin="172,199,566,149" Opacity="{Binding [8].Opacity}" ToolTip="{Binding [8].ToolTip}" />
+                                <Image Source="{Binding [9].Icon}" Margin="80,259,658,91" Opacity="{Binding [9].Opacity}" ToolTip="{Binding [9].ToolTip}" />
+                                <Image Source="{Binding [10].Icon}" Margin="197,259,540,91" Opacity="{Binding [10].Opacity}" ToolTip="{Binding [10].ToolTip}" />
+                                <Image Source="{Binding [11].Icon}" Margin="80,319,658,29" Opacity="{Binding [11].Opacity}" ToolTip="{Binding [11].ToolTip}" />
+                                <Image Source="{Binding [12].Icon}" Margin="138,319,601,29" Opacity="{Binding [12].Opacity}" ToolTip="{Binding [12].ToolTip}" />
+                                <Image Source="{Binding [13].Icon}" Margin="197,319,540,29" Opacity="{Binding [13].Opacity}" ToolTip="{Binding [13].ToolTip}" />
+                                <Image Source="{Binding [27].Icon}" Margin="308,19,430,329" Opacity="{Binding [27].Opacity}" ToolTip="{Binding [27].ToolTip}" />
+                                <Image Source="{Binding [28].Icon}" Margin="423,19,313,329" Opacity="{Binding [28].Opacity}" ToolTip="{Binding [28].ToolTip}" />
+                                <Image Source="{Binding [29].Icon}" Margin="308,79,430,272" Opacity="{Binding [29].Opacity}" ToolTip="{Binding [29].ToolTip}" />
+                                <Image Source="{Binding [30].Icon}" Margin="366,79,373,272" Opacity="{Binding [30].Opacity}" ToolTip="{Binding [30].ToolTip}" />
+                                <Image Source="{Binding [31].Icon}" Margin="423,79,313,272" Opacity="{Binding [31].Opacity}" ToolTip="{Binding [31].ToolTip}" />
+                                <Image Source="{Binding [32].Icon}" Margin="308,139,430,209" Opacity="{Binding [32].Opacity}" ToolTip="{Binding [32].ToolTip}" />
+                                <Image Source="{Binding [33].Icon}" Margin="423,139,313,209" Opacity="{Binding [33].Opacity}" ToolTip="{Binding [33].ToolTip}" />
+                                <Image Source="{Binding [34].Icon}" Margin="334,199,404,149" Opacity="{Binding [34].Opacity}" ToolTip="{Binding [34].ToolTip}" />
+                                <Image Source="{Binding [35].Icon}" Margin="398,199,341,149" Opacity="{Binding [35].Opacity}" ToolTip="{Binding [35].ToolTip}" />
+                                <Image Source="{Binding [36].Icon}" Margin="308,259,430,91" Opacity="{Binding [36].Opacity}" ToolTip="{Binding [36].ToolTip}" />
+                                <Image Source="{Binding [37].Icon}" Margin="423,259,313,91" Opacity="{Binding [37].Opacity}" ToolTip="{Binding [37].ToolTip}" />
+                                <Image Source="{Binding [38].Icon}" Margin="308,319,430,29" Opacity="{Binding [38].Opacity}" ToolTip="{Binding [38].ToolTip}" />
+                                <Image Source="{Binding [39].Icon}" Margin="366,319,373,29" Opacity="{Binding [39].Opacity}" ToolTip="{Binding [39].ToolTip}" />
+                                <Image Source="{Binding [40].Icon}" Margin="423,319,313,29" Opacity="{Binding [40].Opacity}" ToolTip="{Binding [40].ToolTip}" />
+                                <Image Source="{Binding [14].Icon}" Margin="537,19,200,329" Opacity="{Binding [14].Opacity}" ToolTip="{Binding [14].ToolTip}" />
+                                <Image Source="{Binding [15].Icon}" Margin="652,19,87,329" Opacity="{Binding [15].Opacity}" ToolTip="{Binding [15].ToolTip}" />
+                                <Image Source="{Binding [16].Icon}" Margin="564,79,175,272" Opacity="{Binding [16].Opacity}" ToolTip="{Binding [16].ToolTip}" />
+                                <Image Source="{Binding [17].Icon}" Margin="629,79,110,272" Opacity="{Binding [17].Opacity}" ToolTip="{Binding [17].ToolTip}" />
+                                <Image Source="{Binding [18].Icon}" Margin="537,139,200,209" Opacity="{Binding [18].Opacity}" ToolTip="{Binding [18].ToolTip}" />
+                                <Image Source="{Binding [19].Icon}" Margin="652,139,87,209" Opacity="{Binding [19].Opacity}" ToolTip="{Binding [19].ToolTip}" />
+                                <Image Source="{Binding [20].Icon}" Margin="564,199,175,149" Opacity="{Binding [20].Opacity}" ToolTip="{Binding [20].ToolTip}" />
+                                <Image Source="{Binding [21].Icon}" Margin="629,199,110,149" Opacity="{Binding [21].Opacity}" ToolTip="{Binding [21].ToolTip}" />
+                                <Image Source="{Binding [22].Icon}" Margin="537,259,200,91" Opacity="{Binding [22].Opacity}" ToolTip="{Binding [22].ToolTip}" />
+                                <Image Source="{Binding [23].Icon}" Margin="652,259,87,91" Opacity="{Binding [23].Opacity}" ToolTip="{Binding [23].ToolTip}" />
+                                <Image Source="{Binding [24].Icon}" Margin="537,319,200,29" Opacity="{Binding [24].Opacity}" ToolTip="{Binding [24].ToolTip}" />
+                                <Image Source="{Binding [25].Icon}" Margin="595,319,143,29" Opacity="{Binding [25].Opacity}" ToolTip="{Binding [25].ToolTip}" />
+                                <Image Source="{Binding [26].Icon}" Margin="652,319,87,29" Opacity="{Binding [26].Opacity}" ToolTip="{Binding [26].ToolTip}" />
+                            </Grid>
                         </Grid>
                     </TabItem>
                     <ListView x:Name="listView" Height="100" Width="100">

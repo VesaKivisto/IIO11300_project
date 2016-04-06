@@ -23,7 +23,7 @@ namespace IIO11300project
                 Summoner summoner = new Summoner();
                 summoner.Name = txtSummonerName.Text.ToLower();
                 summoner.Region = cbRegions.SelectedValue.ToString().ToLower();
-                summoner = RiotApiHandler.RequestSummonerData(summoner);
+                summoner = BLController.GetSummonerData(summoner);
 
                 Profile profile = new Profile(summoner);
                 profile.Show();
@@ -39,14 +39,13 @@ namespace IIO11300project
         {
             Dictionary<string, string> regions = new Dictionary<string, string>();
 
-            regions = RiotApiHandler.GetRegionsPlatforms();
+            regions = BLController.GetRegionsPlatforms();
             foreach (var value in regions.Keys)
             {
                 cbRegions.Items.Add(value);
             }
 
             cbRegions.SelectedIndex = 2;
-            
         }
     }
 }

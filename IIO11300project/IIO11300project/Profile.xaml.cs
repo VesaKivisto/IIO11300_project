@@ -21,6 +21,10 @@ namespace IIO11300project
     public partial class Profile : Window
     {
         Summoner summoner;
+        List<Match> matches = new List<Match>();
+        List<Champion> champions = new List<Champion>();
+        List<Masterypage> masteryPages = new List<Masterypage>();
+        List<Runepage> runePages = new List<Runepage>();
         public Profile(Summoner summoner)
         {
             this.summoner = summoner;
@@ -30,7 +34,7 @@ namespace IIO11300project
 
         public void InitSummonerProfile(Summoner summoner)
         {
-            summoner = RiotApiHandler.RequestRankedData(summoner);
+            summoner = BLController.GetRankedData(summoner);
             spSummonerInfo.DataContext = summoner;
         }
 
@@ -41,24 +45,52 @@ namespace IIO11300project
                 TabControl tabControl = (TabControl)sender;
                 TabItem currentTab = (TabItem)tabControl.SelectedItem;
                 string current = (string)currentTab.Header;
-                switch(current)
+                switch (current)
                 {
+                    case "Matches":
+                        try
+                        {
+                            matches = BLController.GetMatchHistory(summoner, matches);
+                            dgMatches.DataContext = matches;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                        break;
                     case "Champions":
-                        List<Champion> champions = RiotApiHandler.RequestChampionMastery(summoner);
-                        dgChampions.DataContext = champions;
+                        try
+                        {
+                            champions = BLController.GetChampionMastery(summoner, champions);
+                            dgChampions.DataContext = champions;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                         break;
                     case "Masteries":
-                        /*
-                        List<string> masteries = RiotApiHandler.RequestMasteryPages(summoner);
-                        grdMasteryPage.DataContext = masteries;
-                        */
-                        List<Mastery> masteries = RiotApiHandler.GetAllMasteryData();
-                        masteries = RiotApiHandler.RequestMasteryPages(summoner, masteries);
-                        grdMasteryPage.DataContext = masteries;
+                        try
+                        {
+                            masteryPages = BLController.GetMasteryPages(summoner, masteryPages);
+                            grdMasteryPage.DataContext = masteryPages[0].masteries;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                         break;
                     case "Runes":
-                        List<string> runes = RiotApiHandler.RequestRunePages(summoner);
-                        grdRunePage.DataContext = runes;
+                        try
+                        {
+                            runePages = BLController.GetRunePages(summoner, runePages);
+                            grdRunes.DataContext = runePages[0].Runes;
+                            spPageInfo.DataContext = runePages[0];
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                         break;
                 }
             }
