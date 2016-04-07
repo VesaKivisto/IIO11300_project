@@ -18,7 +18,7 @@
                     <Image x:Name="imgRankIcon" Height="75" Width="75" Margin="25, 10, 0, 25" Source="{Binding Path=RankIcon}"/>
                     <TextBlock x:Name="tbRank" Margin="20, 10, 0, 25" VerticalAlignment="Center" Text="{Binding Path=TierDivision}"/>
                     <TextBlock x:Name="tbLeagueName" Margin="20, 10, 0, 25" VerticalAlignment="Center" Text="{Binding Path=LeagueName}"/>
-                    <TextBlock x:Name="tbRankLP" Margin="20, 10, 0, 25" VerticalAlignment="Center" Text="{Binding Path=LP}"/>
+                    <TextBlock x:Name="tbRankLP" Margin="20, 10, 0, 25" VerticalAlignment="Center" Text="{Binding Path=GetLP}"/>
                     <TextBlock x:Name="tbRankWinrate" Margin="20, 10, 0, 25" VerticalAlignment="Center" Text="{Binding Path=Winrate}"/>
                 </StackPanel>
             </StackPanel>
@@ -101,11 +101,8 @@
                     </TabItem>
                     <TabItem x:Name="tabRunes" Header="Runes" >
                         <Grid>
-                            <StackPanel>
-                                <TabControl x:Name="tcRunes">
-                                    <TabItem Header="1" />
-                                </TabControl>
-                            </StackPanel>
+                            <Grid x:Name="grdRunePages" Margin="17,0,174,399">
+                            </Grid>
                             <Grid Margin="0, 28, 0, 0" x:Name="grdRunes">
                                 <Image Source="/images/rune-bg.png" Height="395" Margin="10,0,160,0"/>
                                 <Image Source="{Binding [0].Icon}" Margin="{Binding [0].Position}" ToolTip="{Binding [0].Descr}" Stretch="Fill" />
@@ -146,13 +143,10 @@
                         </Grid>
                     </TabItem>
                     <TabItem x:Name="tabMasteries" Header="Masteries">
-                        <Grid x:Name="grdMasteryPage">
-                            <StackPanel>
-                                <TabControl>
-                                    <TabItem Header="1" />
-                                </TabControl>
-                            </StackPanel>
-                            <Grid Margin="0, 28, 0, 0">
+                        <Grid>
+                            <Grid x:Name="grdMasteryPages" Margin="17,0,174,399">
+                            </Grid>
+                            <Grid x:Name="grdMasteries" Margin="0, 28, 0, 0">
                                 <Image Source="/images/masteries-bg.jpg" />
                                 <Image Source="{Binding [0].Icon}" Margin="80,19,658,328" Opacity="{Binding [0].Opacity}" ToolTip="{Binding [0].ToolTip}" />
                                 <Image Source="{Binding [1].Icon}" Margin="195,19,542,329" Opacity="{Binding [1].Opacity}" ToolTip="{Binding [1].ToolTip}" />
@@ -198,13 +192,6 @@
                             </Grid>
                         </Grid>
                     </TabItem>
-                    <ListView x:Name="listView" Height="100" Width="100">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Asd"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
                 </TabControl>
             </StackPanel>
         </StackPanel>

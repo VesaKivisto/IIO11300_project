@@ -146,10 +146,10 @@ namespace IIO11300project
                     JObject masteryData = RiotApiHandler.RequestMasteryPages(summoner);
                     foreach (var pageData in masteryData[summoner.ID]["pages"])
                     {
+                        List<Mastery> masteries = new List<Mastery>();
+                        masteries = GetAllMasteryData();
                         if (pageData.Count() == 4)
                         {
-                            List<Mastery> masteries = new List<Mastery>();
-                            masteries = GetAllMasteryData();
                             int masteryCount = pageData["masteries"].Count();
                             for (int iter = 0; iter < masteryCount; iter++)
                             {
@@ -165,6 +165,7 @@ namespace IIO11300project
                         else
                         {
                             Masterypage page = new Masterypage();
+                            page.masteries = masteries;
                             masteryPages.Add(page);
                         }
                     }
@@ -180,7 +181,7 @@ namespace IIO11300project
                 return masteryPages;
             }
         }
-
+        
         public static List<Runepage> GetRunePages(Summoner summoner, List<Runepage> runePages)
         {
             if (runePages.Count == 0)
@@ -190,10 +191,10 @@ namespace IIO11300project
                     JObject runeData = RiotApiHandler.RequestRunePages(summoner);
                     foreach (var pageData in runeData[summoner.ID]["pages"])
                     {
+                        Runepage page = new Runepage();
+                        page.DescriptionCount = new Dictionary<string, int>();
                         if (pageData.Count() == 4)
                         {
-                            Runepage page = new Runepage();
-                            page.DescriptionCount = new Dictionary<string, int>();
                             page.Name = pageData["name"].ToString();
                             List<Rune> runes = new List<Rune>();
                             int runeCount = pageData["slots"].Count();
@@ -224,7 +225,6 @@ namespace IIO11300project
                                         descr = row["descr"].ToString();
                                         count++;
                                     }
-                                    //MessageBox.Show(descr + " " + count.ToString());
                                 }
                                 rune.Position = GetRunePositionBySlotId(rune.SlotID);
                                 runes.Add(rune);
@@ -238,7 +238,8 @@ namespace IIO11300project
                         }
                         else
                         {
-                            Runepage page = new Runepage();
+                            page.Name = pageData["name"].ToString();
+                            page.DescriptionCount.Add("", 0);
                             runePages.Add(page);
                         }
                     }
@@ -255,7 +256,7 @@ namespace IIO11300project
                 return runePages;
             }
         }
-
+        
         public static List<Match> GetMatchHistory(Summoner summoner, List<Match> matches)
         {
             if (matches.Count == 0)

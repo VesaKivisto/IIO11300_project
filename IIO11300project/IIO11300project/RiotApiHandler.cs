@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.Windows;
-using System.Web.Helpers;
 using System.Text;
 using Newtonsoft.Json;
 using System.IO;
@@ -47,6 +46,8 @@ namespace IIO11300project
             }
             catch (Exception)
             {
+                JObject rankedData = new JObject();
+                return rankedData;
                 throw;
             } 
         }

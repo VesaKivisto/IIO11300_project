@@ -119,6 +119,9 @@ namespace IIO11300project
 
         public static string GetProfileIcon(string id)
         {
+            string url = "http://ddragon.leagueoflegends.com/cdn/6.7.1/img/profileicon/" + id + ".png";
+            return url;
+            /*
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(Properties.Settings.Default.Database))
@@ -137,6 +140,7 @@ namespace IIO11300project
 
                 throw;
             }
+            */
         }
 
         public static void InsertMatchToDatabase(Match match, Summoner summoner)
@@ -197,7 +201,6 @@ namespace IIO11300project
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

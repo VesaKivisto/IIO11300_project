@@ -38,5 +38,20 @@ namespace IIO11300project
                 }
             }
         }
+
+        public string GetLP
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(LP))
+                {
+                    return LP + " LP";
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
     }
 }
