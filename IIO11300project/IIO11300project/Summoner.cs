@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IIO11300project
 {
+    // A class for displaying player, or summoner as League of Legends calls its players, data. Has a combination of general data as well as data from ranked games.
+    // Summoner class objects are used in pretty much everywhere in this software. Summoner class is pretty much the most crucial class.
     public class Summoner
     {
         public string ID { get; set; }
         public string Name { get; set; }
         public string ProfileIcon { get; set; }
         public string Region { get; set; }
+        public string Level { get; set; }
         public string PlatformID { get; set; }
         public string LP { get; set; }
         public int Wins { get; set; }
@@ -20,9 +19,13 @@ namespace IIO11300project
         public string Tier { get; set; }
         public string Division { get; set; }
         public string RankIcon { get; set; }
-        public string TierDivision
+        public string SummonerInfo
         {
-            get { return Tier + " " + Division; }
+            get { return Name + "\n" + Region.ToUpper() + "\nLevel " + Level; }
+        }
+        public string RankedInfo
+        {
+            get { return Tier + " " + Division + "\n" + LeagueName + "\n" + GetLP + "\n" + Winrate; }
         }
         public string Winrate
         {
@@ -38,7 +41,6 @@ namespace IIO11300project
                 }
             }
         }
-
         public string GetLP
         {
             get

@@ -1,0 +1,131 @@
+﻿<Window x:Class="IIO11300project.MatchDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IIO11300project"
+        mc:Ignorable="d"
+        Title="Match Details" Height="750" Width="990"
+        ResizeMode="NoResize">
+    <Grid x:Name="grdData">
+        <StackPanel Margin="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Width="200" Height="80" Margin="10, 0, 0, 0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Played on: " FontSize="15" />
+                        <TextBlock Text="{Binding Path=CreationDate}" FontSize="15" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Match length: " FontSize="15" />
+                        <TextBlock Text="{Binding Path=TimePlayed}" FontSize="15" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Winner: " FontSize="15" />
+                        <TextBlock Text="{Binding Path=Result}" FontSize="15" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel>
+                    <StackPanel Height="50" Margin="5,0,10,0" Orientation="Horizontal">
+                        <TextBlock Text="Blue Team" FontSize="15" Margin="155, 10, 0, 0"/>
+                        <TextBlock Text="Red Team" FontSize="15" Margin="315, 10, 0, 0"/>
+                    </StackPanel>
+                    <StackPanel x:Name="spIcons" Height="50" Margin="8,0,10,0" Orientation="Horizontal"/>
+                </StackPanel>
+            </StackPanel>
+            <Border BorderBrush="Black" BorderThickness="0, 1, 0, 0">
+                <StackPanel Orientation="Horizontal" Margin="5, 0, 5, 0">
+                    <StackPanel Background="AliceBlue" Width="210">
+                        <TextBlock Text="KDA" />
+                        <Separator/>
+                        <TextBlock Text="Largest Killing Spree" />
+                        <Separator/>
+                        <TextBlock Text="Largest Multi Kill" />
+                        <Separator/>
+                        <TextBlock Text="Towers Destroyed" />
+                        <Separator/>
+                        <TextBlock Text="Inhibitors Destroyed" />
+                        <Separator/>
+                        <TextBlock Text="Total Damage to Champions" />
+                        <Separator/>
+                        <TextBlock Text="Physical Damage to Champions" />
+                        <Separator/>
+                        <TextBlock Text="Magic Damage to Champions" />
+                        <Separator/>
+                        <TextBlock Text="True Damage to Champions" />
+                        <Separator/>
+                        <TextBlock Text="Damage Dealt" />
+                        <Separator/>
+                        <TextBlock Text="Physical Damage Dealt" />
+                        <Separator/>
+                        <TextBlock Text="Magic Damage Dealt" />
+                        <Separator/>
+                        <TextBlock Text="True Damage Dealt" />
+                        <Separator/>
+                        <TextBlock Text="Largest Critical Strike" />
+                        <Separator/>
+                        <TextBlock Text="Total CC Dealt in Seconds" />
+                        <Separator/>
+                        <TextBlock Text="Damage Healed" />
+                        <Separator/>
+                        <TextBlock Text="Damage Taken" />
+                        <Separator/>
+                        <TextBlock Text="Physical Damage Taken" />
+                        <Separator/>
+                        <TextBlock Text="Magic Damage Taken" />
+                        <Separator/>
+                        <TextBlock Text="True Damage Taken" />
+                        <Separator/>
+                        <TextBlock Text="Wards Placed" />
+                        <Separator/>
+                        <TextBlock Text="Wards Destroyed" />
+                        <Separator/>
+                        <TextBlock Text="Vision Wards Purchased" />
+                        <Separator/>
+                        <TextBlock Text="Gold Earned" />
+                        <Separator/>
+                        <TextBlock Text="Gold Spent" />
+                        <Separator/>
+                        <TextBlock Text="Minions Killed" />
+                        <Separator/>
+                        <TextBlock Text="Neutral Minions Killed" />
+                        <Separator/>
+                        <TextBlock Text="Neutral Minions Killed in Team Jungle" />
+                        <Separator/>
+                        <TextBlock Text="Neutral Minions Killed in Enemy Jungle" />
+                        <Separator/>
+                    </StackPanel>
+                    <Border BorderBrush="Black" BorderThickness="1, 0, 1, 0">
+                        <StackPanel x:Name="spSummoner0" Width="75"/>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="0, 0, 1, 0">
+                        <StackPanel x:Name="spSummoner1" Width="75"/>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="0, 0, 1, 0">
+                        <StackPanel x:Name="spSummoner2" Width="75"/>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="0, 0, 1, 0">
+                        <StackPanel x:Name="spSummoner3" Width="75"/>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="0, 0, 1, 0">
+                        <StackPanel x:Name="spSummoner4" Width="75"/>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="1, 0, 1, 0">
+                        <StackPanel x:Name="spSummoner5" Width="75"/>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="0, 0, 1, 0">
+                        <StackPanel x:Name="spSummoner6" Width="75"/>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="0, 0, 1, 0">
+                        <StackPanel x:Name="spSummoner7" Width="75"/>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="0, 0, 1, 0">
+                        <StackPanel x:Name="spSummoner8" Width="75"/>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="0, 0, 1, 0">
+                        <StackPanel x:Name="spSummoner9" Width="75"/>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>

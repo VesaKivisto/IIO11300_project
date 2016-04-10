@@ -45,6 +45,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -66,8 +67,15 @@
     <Compile Include="BLController.cs" />
     <Compile Include="Champion.cs" />
     <Compile Include="DBHandler.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Mastery.cs" />
+    <Compile Include="Masterypage.cs" />
     <Compile Include="Match.cs" />
+    <Compile Include="Matchdetails.cs" />
+    <Compile Include="MatchDetailsWindow.xaml.cs">
+      <DependentUpon>MatchDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Participant.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -75,34 +83,40 @@
     </Compile>
     <Compile Include="RiotApiHandler.cs" />
     <Compile Include="Rune.cs" />
-    <Compile Include="Search.xaml.cs">
-      <DependentUpon>Search.xaml</DependentUpon>
+    <Compile Include="Runepage.cs" />
+    <Compile Include="SearchWindow.xaml.cs">
+      <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Spell.cs" />
+    <Compile Include="Stats.cs" />
     <Compile Include="Summoner.cs" />
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="SummonerDetailsWindow.xaml.cs">
+      <DependentUpon>SummonerDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Profile.xaml">
+    <Page Include="MatchDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Search.xaml">
+    <Page Include="ProfileWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SummonerDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Profile.xaml.cs">
-      <DependentUpon>Profile.xaml</DependentUpon>
+    <Compile Include="ProfileWindow.xaml.cs">
+      <DependentUpon>ProfileWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -117,6 +131,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
     <None Include="Properties\Settings.settings">
@@ -137,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\masteries-bg.jpg" />
-    <Resource Include="images\placeholder.png" />
     <Resource Include="images\rune-bg.png" />
   </ItemGroup>
   <ItemGroup>
@@ -166,13 +180,6 @@
     <Resource Include="images\tier_icons\silver_iii.png" />
     <Resource Include="images\tier_icons\silver_iv.png" />
     <Resource Include="images\tier_icons\silver_v.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\6111.png" />
-    <Resource Include="images\r_1_3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\rune-slot-ids.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
