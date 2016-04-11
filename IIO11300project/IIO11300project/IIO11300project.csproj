@@ -131,7 +131,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
     <None Include="Properties\Settings.settings">

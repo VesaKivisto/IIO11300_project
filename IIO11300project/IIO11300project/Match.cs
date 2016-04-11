@@ -7,7 +7,6 @@ namespace IIO11300project
     public class Match
     {
         public string ID { get; set; }
-        public string ChampionLevel { get; set; }
         public string GameMode { get; set; }
         public string GoldEarned { get; set; }
         public int Kills { get; set; }

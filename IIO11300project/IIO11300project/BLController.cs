@@ -94,7 +94,7 @@ namespace IIO11300project
                     else
                     {
                         summoner.RankIcon = "/images/base_icons/provisional.png";
-                        summoner.Division = "Unranked";
+                        summoner.Tier = "Unranked";
                     }
                     return summoner;
                 }
@@ -290,7 +290,6 @@ namespace IIO11300project
                         Champion champion = new Champion();
                         champion.ID = game["championId"].ToString();
                         match.ID = game["gameId"].ToString();
-                        match.ChampionLevel = game["stats"]["level"].ToString();
                         // Gamemodes have their own silly codes. Trying to make them more sensible.
                         if (game["subType"].ToString() == "ARAM_UNRANKED_5x5")
                         {
